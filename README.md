@@ -25,3 +25,16 @@ AuthxKit.shared.authenticateUsingBiometrics(authenticationMessage: "Perform biom
       }
 })
 ```
+### Use Apple Watch authentication (only available for macOS)
+```swift
+import AuthxKit
+
+AuthxKit.shared.authenticateUsingWatch(authenticationMessage: "Apple watch auth") {
+      isAuthenticated, error in
+      if isAuthenticated {
+//          Perform action awaiting authentication
+      } else {
+//          Perform action in case of failed authentication
+      }
+}
+```
