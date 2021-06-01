@@ -17,11 +17,11 @@ Note: To use FaceID: add the key "Privacy - Face ID Usage Description" to your a
 import AuthxKit
 
 AuthxKit.shared.authenticateUsingBiometrics(authenticationMessage: "Perform biometric authentication to proceed", completion: {
-                isAuthenticated, _ in
-                if isAuthenticated {
-//                    Perform action awaiting authentication
-                } else {
-//                    Perform action in case of failed authentication
-                }
-            })
+      isAuthenticated, _ in
+      if isAuthenticated {
+//          Perform action awaiting authentication
+      } else {
+//          Perform action in case of failed authentication
+      }
+})
 ```
