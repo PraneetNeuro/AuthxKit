@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "AuthxKit",
     platforms: [
-        .iOS(.v10),
+        .iOS(.v8),
         .macOS(.v10_15),
     ],
     products: [

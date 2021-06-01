@@ -5,7 +5,7 @@ public class AuthxKit {
     public static var shared: AuthxKit = AuthxKit()
     
     private var authContext: LAContext = LAContext()
-    private var defaultAuthenticationMessage: String = "Authenticate with Apple Watch to proceed"
+    private var defaultAuthenticationMessage: String = "Authenticate to proceed"
     public var error: NSError?
     
     public var canUseBiometrics: Bool {
@@ -13,14 +13,17 @@ public class AuthxKit {
     }
     
     public func authenticateUsingWatch(authenticationMessage: String?, completion: @escaping (Bool, NSError?) -> Void) {
+        if #available(macOS 10.15, *) {
         if self.canUseBiometrics {
-            self.authContext.evaluatePolicy(.deviceOwnerAuthenticationWithWatch, localizedReason: authenticationMessage ?? self.defaultAuthenticationMessage) { isAuthenticated, error in
+            self.authContext.evaluatePolicy(.deviceOwnerAuthenticationWithWatch, localizedReason: authenticationMessage ?? "Authenticate using Apple Watch to proceed") { isAuthenticated, error in
                 DispatchQueue.main.async {
                     completion(isAuthenticated, self.error)
                 }
             }
         } else {
             self.authenticateUsingUserSetSecretKey(authenticationMessage: authenticationMessage ?? self.defaultAuthenticationMessage, completion: completion)
+        } } else {
+            error = NSError()
         }
     }
     
