@@ -12,8 +12,8 @@ public class AuthxKit {
         return self.authContext.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error)
     }
     
+    #if os(macOS)
     public func authenticateUsingWatch(authenticationMessage: String?, completion: @escaping (Bool, NSError?) -> Void) {
-        if #available(macOS 10.15, *) {
         if self.canUseBiometrics {
             self.authContext.evaluatePolicy(.deviceOwnerAuthenticationWithWatch, localizedReason: authenticationMessage ?? "Authenticate using Apple Watch to proceed") { isAuthenticated, error in
                 DispatchQueue.main.async {
@@ -22,10 +22,9 @@ public class AuthxKit {
             }
         } else {
             self.authenticateUsingUserSetSecretKey(authenticationMessage: authenticationMessage ?? self.defaultAuthenticationMessage, completion: completion)
-        } } else {
-            error = NSError()
         }
     }
+    #endif
     
     public func authenticateUsingBiometrics(authenticationMessage: String?, completion: @escaping (Bool, NSError?) -> Void) {
         if self.canUseBiometrics {
