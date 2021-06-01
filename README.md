@@ -10,3 +10,15 @@ if AuthxKit.shared.canUseBiometrics {
       // Fallback
 }
 ```
+### Use biometric authentication
+Note: To use FaceID: add the key "Privacy - Face ID Usage Description" to your app's info.plist
+```swift
+AuthxKit.shared.authenticateUsingBiometrics(authenticationMessage: "Would like to use FaceID for authentication", completion: {
+                isAuthenticated, _ in
+                if isAuthenticated {
+//                    Perform action awaiting authentication
+                } else {
+//                    Perform action in case of failed authentication
+                }
+            })
+```
