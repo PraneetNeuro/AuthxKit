@@ -4,6 +4,7 @@ Swift package for using biometric authentication services for iOS, iPadOS and ma
 ## Check if device has support for biometric authentication
 ```swift
 import AuthxKit
+
 if AuthxKit.shared.canUseBiometrics {
       // Do something
 } else {
@@ -13,6 +14,8 @@ if AuthxKit.shared.canUseBiometrics {
 ### Use biometric authentication
 Note: To use FaceID: add the key "Privacy - Face ID Usage Description" to your app's info.plist
 ```swift
+import AuthxKit
+
 AuthxKit.shared.authenticateUsingBiometrics(authenticationMessage: "Perform biometric authentication to proceed", completion: {
                 isAuthenticated, _ in
                 if isAuthenticated {
