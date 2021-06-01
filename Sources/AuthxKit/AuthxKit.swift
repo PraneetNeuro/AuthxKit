@@ -6,7 +6,17 @@ public class AuthxKit {
     
     private var authContext: LAContext = LAContext()
     private var defaultAuthenticationMessage: String = "Authenticate to proceed"
-    public var error: NSError?
+    private var error: NSError?
+    
+    /// Indicates if device has FaceID support
+    public var isFaceIDAvailable: Bool {
+        return self.authContext.biometryType == .faceID
+    }
+    
+    /// Indicates if device has TouchID support
+    public var isTouchIDAvailable: Bool {
+        return self.authContext.biometryType == .touchID
+    }
     
     /// Indicates if device supports biometric authentication
     public var canUseBiometrics: Bool {
